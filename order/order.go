@@ -11,7 +11,7 @@ const (
 )
 
 type Order struct {
-	Items     []Pizza
+	Items     []pizza.pizza
 	TotalCost float64
 	State     OrderState
 	CreatedAt time.Time
