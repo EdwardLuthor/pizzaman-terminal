@@ -98,6 +98,7 @@ func RunMenu() {
 				continue
 			}
 			pizzaManager, removed = pizzaManager.RemovePizza(id)
+			// found можно убрать, не имеет особого смысла
 			if removed {
 				fmt.Println("Пицца успешно удалена.")
 			} else {
