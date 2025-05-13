@@ -105,6 +105,9 @@ func RunMenu() {
 			}
 		case 0:
 			fmt.Println("Выход из программы.")
+			return
+		default:
+			fmt.Println("Некорректный выбор.")
 		}
 	}
 }
