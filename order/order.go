@@ -1,5 +1,11 @@
 package order
 
+import (
+	"time"
+
+	"github.com/EdwardLuthor/pizzaman-terminal/pizza"
+)
+
 type OrderState string
 
 const (
@@ -8,4 +14,10 @@ const (
 	OrderStateDone       OrderState = "done"
 )
 
-type Order map[string]interface{}
+type Order struct {
+	Items     []pizza.Pizza
+	TotalCost float64
+	State     OrderState
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
