@@ -13,49 +13,6 @@ type PizzaManager struct {
 func NewPizzaManager() PizzaManager {
 	return PizzaManager{pizzas: []pizza.Pizza{}}
 }
-
-func (m PizzaManager) ListPizzas() {
-	fmt.Println("\n Меню пицц ")
-	if len(m.pizzas) == 0 {
-		fmt.Println("В меню пока нет пицц.")
-		return
-	}
-	for _, p := range m.pizzas {
-		fmt.Printf("%d. %s - $%.2f\n", p.ID, p.Name, p.Cost)
-	}
-}
-
-func (m PizzaManager) AddPizza(name string, cost float64) PizzaManager {
-	newPizza := pizza.Pizza{
-		ID:   len(m.pizzas) + 1,
-		Name: name,
-		Cost: cost,
-	}
-	newManager := PizzaManager{pizzas: append(m.pizzas, newPizza)}
-	fmt.Printf("Пицца %s добавлена в меню с ID %d.\n\n", newPizza.Name, newPizza.ID)
-	return newManager
-}
-
-func (m PizzaManager) RemovePizza(id int) (PizzaManager, bool) {
-	initialLen := len(m.pizzas)
-	newPizzas := []pizza.Pizza{}
-	var found bool = false
-	for _, p := range m.pizzas {
-		if p.ID != id {
-			newPizzas = append(newPizzas, p)
-		} else {
-			found = true
-		}
-	}
-	newManager := PizzaManager{pizzas: newPizzas}
-	if len(newManager.pizzas) < initialLen {
-		fmt.Printf("Пицца с ID %d удалена.\n\n", id)
-	} else {
-		fmt.Printf("Пицца с ID %d не найдена в меню.\n\n", id)
-	}
-	return newManager, found
-}
-
 func RunMenu() {
 	pizzaManager := NewPizzaManager()
 	for {
@@ -74,7 +31,7 @@ func RunMenu() {
 
 		switch choice {
 		case 1:
-			pizzaManager.ListPizzas()
+			Manager.ListPizzas()
 
 		case 2:
 			fmt.Println("Введите название новой пиццы: ")
@@ -87,7 +44,7 @@ func RunMenu() {
 				fmt.Println("Ошибка, некорректный формат стоимости")
 				continue
 			}
-			pizzaManager = pizzaManager.AddPizza(name, cost)
+			pizzaManager = Manager.AddPizza(name, cost)
 		case 3:
 			fmt.Print("Введите ID пиццы для удаления: ")
 			var id int
@@ -97,7 +54,7 @@ func RunMenu() {
 				fmt.Println("Ошибка, некорректный формат ID")
 				continue
 			}
-			pizzaManager, removed = pizzaManager.RemovePizza(id)
+			pizzaManager, removed = Manager.RemovePizza(id)
 			// found можно убрать, не имеет особого смысла
 			if removed {
 				fmt.Println("Пицца успешно удалена.")
