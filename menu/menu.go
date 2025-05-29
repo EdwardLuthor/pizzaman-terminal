@@ -15,12 +15,13 @@ type Menu struct {
 	reader       *bufio.Reader
 }
 
-func NewMenu() *Menu {
+func NewMenu(manager *pizza.Manager) *Menu {
 	return &Menu{
-		pizzaManager: pizza.NewManager(),
+		pizzaManager: manager,
 		reader:       bufio.NewReader(os.Stdin),
 	}
 }
+
 func (m *Menu) displayMainMenu() {
 	fmt.Println("Выберите действие:")
 	fmt.Println("1. Вывести список пицц")
@@ -126,9 +127,9 @@ func (m *Menu) RemovePizza() {
 	}
 }
 
-func RunMenu() {
+func RunMenu(manager *pizza.Manager) {
 
-	menu := NewMenu()
+	menu := NewMenu(manager)
 
 	for {
 		menu.displayMainMenu()

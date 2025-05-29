@@ -2,8 +2,10 @@ package main
 
 import (
 	"github.com/EdwardLuthor/pizzaman-terminal/menu"
+	"github.com/EdwardLuthor/pizzaman-terminal/pizza"
 )
 
 func main() {
-	menu.RunMenu()
+	pizzaManager := pizza.NewManager()
+	menu.RunMenu(pizzaManager)
 }
